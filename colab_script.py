@@ -455,9 +455,9 @@ def train_colab_model(data_dir):
     random.shuffle(unique_subs)
     
     n = len(unique_subs)
-    train_subs = set(unique_subs[:int(0.75*n)])
-    val_subs = set(unique_subs[int(0.75*n):int(0.9*n)])
-    test_subs = set(unique_subs[int(0.9*n):])
+    train_subs = set(unique_subs[:int(0.65*n)])
+    val_subs = set(unique_subs[int(0.65*n):int(0.77*n)])
+    test_subs = set(unique_subs[int(0.77*n):])
     
     train_files = [f for f in files if subjects[f] in train_subs]
     val_files = [f for f in files if subjects[f] in val_subs]
@@ -495,10 +495,10 @@ def train_colab_model(data_dir):
     
     # Overwrite for Kaggle to force speedup if possible
     if "KAGGLE_KERNEL_RUN_TYPE" in os.environ:
-        workers = 0 # FORCED to 0 to avoid massive I/O bottlenecks and RAM issues in multiprocessing on Kaggle
+        workers = 2 # FORCED to 0 to avoid massive I/O bottlenecks and RAM issues in multiprocessing on Kaggle
         print(f"Kaggle detected: forcing {workers} workers to fix I/O lockup.")
 
-    batch_size = 512 # Default bumped up for faster P100/T4 training
+    batch_size = 64 # Default bumped up for faster P100/T4 training
     if device.type == "cuda":
         try:
             gpu_mem_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
