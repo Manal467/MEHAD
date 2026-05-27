@@ -495,7 +495,7 @@ def train_colab_model(data_dir):
     
     # Overwrite for Kaggle to force speedup if possible
     if "KAGGLE_KERNEL_RUN_TYPE" in os.environ:
-        workers = 2 # FORCED to 0 to avoid massive I/O bottlenecks and RAM issues in multiprocessing on Kaggle
+        workers = 0 # FORCED to 0 to avoid massive I/O bottlenecks and RAM issues in multiprocessing on Kaggle
         print(f"Kaggle detected: forcing {workers} workers to fix I/O lockup.")
 
     batch_size = 64 # Default bumped up for faster P100/T4 training
