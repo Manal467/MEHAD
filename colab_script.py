@@ -498,7 +498,7 @@ def train_colab_model(data_dir):
         workers = 0 # FORCED to 0 to avoid massive I/O bottlenecks and RAM issues in multiprocessing on Kaggle
         print(f"Kaggle detected: forcing {workers} workers to fix I/O lockup.")
 
-    batch_size = 64 # Default bumped up for faster P100/T4 training
+    batch_size = 512 # Default bumped up for faster P100/T4 training
     if device.type == "cuda":
         try:
             gpu_mem_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
