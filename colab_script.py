@@ -678,7 +678,7 @@ def train_colab_model(data_dir):
     else:
         print(f"Starting Training Loop: epochs {start_epoch+1} to {num_epochs}")
     
-    save_step_interval = 20
+    save_step_interval = 0
     for epoch in range(start_epoch, num_epochs):
         if latest_step_ckpt_path is not None and epoch == start_epoch:
             pass
